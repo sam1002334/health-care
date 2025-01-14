@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Health Companion</title>
+    <style>
+        :root {
+            --primary-bg-color: #f4f4f4;
+            --primary-text-color: #222222;
+            --secondary-bg-color: #ffffff;
+            --accent-color: #4CAF50;
+            --footer-bg-color: #333333;
+            --footer-text-color: #f9f9f9;
+        }
+
+        body.dark-mode {
+            --primary-bg-color: #1e1e1e;
+            --primary-text-color: #eaeaea;
+            --secondary-bg-color: #2e2e2e;
+            --accent-color: #66bb6a;
+            --footer-bg-color: #000000;
+            --footer-text-color: #bfbfbf;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--primary-bg-color);
+            color: var(--primary-text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: text-decoration 0.3s;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        #toggleMode {
+            position: fixed;
+            top: 40%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: var(--secondary-bg-color);
+            color: var(--accent-color);
+            border: none;
+            border-radius: 50%;
+            padding: 0.5rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #toggleMode:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background-color: var(--secondary-bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .desktop-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: text-decoration 0.3s;
+        }
+
+        .desktop-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hamburger Menu Styling */
+        .hamburger-menu {
+            display: none;
+            position: relative;
+        }
+
+        .hamburger-icon {
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #fff;
+            padding: 0.5rem;
+            border: none;
+            background-color: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--secondary-bg-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            text-align: right;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.8rem;
+            text-decoration: none;
+            color: var(--primary-text-color);
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--accent-color);
+            color: #ffffff;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .desktop-nav {
+                display: none; /* Hide desktop navigation on small screens */
+            }
+
+            .hamburger-menu {
+                display: block; /* Show the hamburger menu on small screens */
+            }
+        }
+
+
+        footer {
+            background-color: var(--footer-bg-color);
+            color: var(--footer-text-color);
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        section {
+            margin: 2rem;
+            padding: 1rem;
+            background-color: var(--secondary-bg-color);
+            border-radius: 8px;
+        }
+
+        section h2 {
+            color: var(--accent-color);
+        }
+
+        #contact-us {
+            padding: 50px 0;
+        
+            }
+
+            #contact-us h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            }
+
+            #contact-us p {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            }
+
+            #contact-us form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 45px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            #contact-us form label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            }
+
+            #contact-us form input,
+            #contact-us form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            }
+
+            #contact-us form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff4081;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            }
+
+            #contact-us form button:hover {
+            background-color: #e63946;
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Health Companion</h1>
+        <nav class="desktop-nav">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#contact-us">Contact</a>
+        </nav>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" id="hamburgerIcon">
+                ☰
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#contact-us">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="home" class="container">
+        <h2>Welcome to Your Health Companion</h2>
+        <p>Discover personalized health insights, symptom checkers, and reliable health advice tailored to your needs.</p>
+    </div>
+
+    <section id="features">
+        <h2>Our Features</h2>
+        <div class="features">
+            <div class="feature">
+                <a href="">
+                    <img src="med1.png" alt="Symptom Checker"> 
+                </a>
+                <h3>Symptom Checker</h3>
+                <p>Analyze your symptoms and get instant advice from our smart tools.</p>
+                
+            </div>
+            <div class="feature">
+                <a href=""><img src="med1.png" alt="Health Tracking"></a>
+                <h3>Health Tracking</h3>
+                <p>Track your health progress with easy-to-use charts and insights.</p>
+            </div>
+            <div class="feature">
+                <a href=""><img src="med1.png" alt="Expert Article"></a>
+                <h3>Expert Articles</h3>
+                <p>Read reliable articles written by experienced healthcare professionals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-us">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>We'd love to hear from you! If you have any questions or need assistance, feel free to reach out to us.</p>
+            <form method="POST">
+                <!-- Web3Forms access key -->
+                <input type="hidden" name="access_key" value="b47f4da1-cee0-47c9-9907-9c706eed0f5d">
+                <div class="contact_input_area">
+                    <div id="success_fail_info"></div>
+                    <div class="row">
+                        <!-- Form Group -->
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" placeholder="Name" required="required">
+                            </div>
+                        </div>
+                        <!-- Form Group -->
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" placeholder="Email" required="required">
+                            </div>
+                        </div>
+                        <!-- Form Group -->
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <input type="text" name="subject" class="form-control" placeholder="Subject" required="required">
+                            </div>
+                        </div>
+                        <!-- Form Group -->
+                        <div class="col-12">
+                            <div class="form-group">
+                                <textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
+                            </div>
+                        </div>
+                        <!-- Button -->
+                        <div class="col-12 text-center">
+                            <button type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-secondary ct_btn" title="Submit Your Message!">Send Message</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Your Health Companion. All rights reserved.</p>
+    </footer>
+
+    <button id="toggleMode">☀</button>
+    <script>
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+    
+        hamburgerIcon.addEventListener('click', () => {
+            const isVisible = dropdownMenu.style.display === 'block';
+            dropdownMenu.style.display = isVisible ? 'none' : 'block';
+        });
+    
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburgerIcon.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
+    </script>
+
+    <script>
+        const toggleButton = document.getElementById('toggleMode');
+
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            toggleButton.textContent = document.body.classList.contains('dark-mode') ? '☽' : '☀';
+        });
+
+        // Make the toggle button draggable
+        toggleButton.style.position = 'fixed';
+        toggleButton.style.cursor = 'grab';
+
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        toggleButton.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - toggleButton.getBoundingClientRect().left;
+            offsetY = e.clientY - toggleButton.getBoundingClientRect().top;
+            toggleButton.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+
+                toggleButton.style.top = `${y}px`;
+                toggleButton.style.left = `${x}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            toggleButton.style.cursor = 'grab';
+
+            // Ensure the button stays on the right edge of the screen
+            const screenWidth = window.innerWidth;
+            const buttonRect = toggleButton.getBoundingClientRect();
+
+            if (buttonRect.right > screenWidth) {
+                toggleButton.style.left = `${screenWidth - buttonRect.width}px`;
+            }
+        });
+    </script>
+</body>
+</html>
